@@ -7,20 +7,46 @@ const eventHour = document.querySelector("#eventHour");
 const eventMinute = document.querySelector("#eventMinute");
 const amPm = document.querySelector("input[name=amPm]:checked").value;
 const start = document.querySelector("#start");
+const stop = document.querySelector("#stop");
 const outputDisplay = document.querySelector("#outputDisplay");
 const inputForm = document.querySelector("#inputForm");
+const timeLeftDisplay = document.querySelector("#timeLeftDisplay");
 
 // DOM ready
 document.addEventListener("DOMContentLoaded", () => {
   createFormOptions();
 
-  start.addEventListener("click", onStart);
+  start.addEventListener("click", handleStart);
+  stop.addEventListener("click", handleStop);
 });
 
-const onStart = () => {
-  console.log(
-    `${eventName.value} on ${eventMonth.value}/${eventDay.value}/${eventYear.value} at ${eventHour.value}:${eventMinute.value}${amPm}`
+const handleStop = (e) => {
+  e.preventDefault();
+  outputDisplay.classList.add("hidden");
+  inputForm.classList.remove("hidden");
+};
+
+const handleStart = (e) => {
+  // Keep page from refreshing
+  e.preventDefault();
+
+  // Dummy values for now
+  let yearsLeft = 1;
+  let monthsLeft = 2;
+  let daysLeft = 3;
+  let hoursLeft = 4;
+  let minutesLeft = 5;
+  let secondsLeft = 20;
+
+  // Create time left string
+  const timeLeftText = document.createTextNode(
+    `${yearsLeft} years ${monthsLeft} months ${daysLeft} days
+    ${hoursLeft} hours ${minutesLeft} minutes and ${secondsLeft} seconds left until
+    ${eventName.value}!`
   );
+
+  timeLeftDisplay.appendChild(timeLeftText);
+
   outputDisplay.classList.remove("hidden");
   inputForm.classList.add("hidden");
 };
@@ -49,10 +75,10 @@ const createFormOptions = () => {
     document.querySelector("#eventMonth").appendChild(option);
   });
 
-  // Create day options
+  // Create day options, 1-indexed
   const days = new Array(31);
-  for (let i = 0; i < days.length; i++) {
-    const option = new Option(i + 1, i + 1);
+  for (let i = 1; i < days.length + 1; i++) {
+    const option = new Option(i, i);
     document.querySelector("#eventDay").appendChild(option);
   }
 
@@ -63,10 +89,10 @@ const createFormOptions = () => {
     document.querySelector("#eventYear").appendChild(option);
   }
 
-  // Create hour options
+  // Create hour options, 1-indexed
   const hours = new Array(12);
-  for (let i = 0; i < hours.length; i++) {
-    const option = new Option(i + 1, i + 1);
+  for (let i = 1; i < hours.length + 1; i++) {
+    const option = new Option(i, i);
     option.selected = 12;
     document.querySelector("#eventHour").appendChild(option);
   }
