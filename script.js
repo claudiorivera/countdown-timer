@@ -5,19 +5,21 @@ const eventDay = document.querySelector("#eventDay");
 const eventYear = document.querySelector("#eventYear");
 const eventHour = document.querySelector("#eventHour");
 const eventMinute = document.querySelector("#eventMinute");
-const amPm = document.querySelector("input[name=amPm]:checked").value;
-const start = document.querySelector("#start");
-const stop = document.querySelector("#stop");
+const startButton = document.querySelector("#startButton");
+const stopButton = document.querySelector("#stopButton");
 const outputDisplay = document.querySelector("#outputDisplay");
 const inputForm = document.querySelector("#inputForm");
 const timeLeftDisplay = document.querySelector("#timeLeftDisplay");
+
+// Hold the AM or PM value
+const amPm = document.querySelector("input[name=amPm]:checked").value;
 
 // DOM ready
 document.addEventListener("DOMContentLoaded", () => {
   createFormOptions();
 
-  start.addEventListener("click", handleStart);
-  stop.addEventListener("click", handleStop);
+  startButton.addEventListener("click", handleStart);
+  stopButton.addEventListener("click", handleStop);
 });
 
 const handleStop = (e) => {
@@ -30,8 +32,20 @@ const handleStart = (e) => {
   // Keep page from refreshing
   e.preventDefault();
 
+  const now = Date.now();
+
+  const timeLeftText = getTimeLeft(now);
+
+  timeLeftDisplay.appendChild(timeLeftText);
+
+  outputDisplay.classList.remove("hidden");
+  inputForm.classList.add("hidden");
+};
+
+const getTimeLeft = (timestamp) => {
+  console.log(timestamp);
   // Dummy values for now
-  let yearsLeft = 1;
+  let yearsLeft = 2;
   let monthsLeft = 2;
   let daysLeft = 3;
   let hoursLeft = 4;
@@ -45,10 +59,7 @@ const handleStart = (e) => {
     ${eventName.value}!`
   );
 
-  timeLeftDisplay.appendChild(timeLeftText);
-
-  outputDisplay.classList.remove("hidden");
-  inputForm.classList.add("hidden");
+  return timeLeftText;
 };
 
 const createFormOptions = () => {
