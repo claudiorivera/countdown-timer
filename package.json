@@ -1,0 +1,10 @@
+{
+  "name": "countdown-timer",
+  "version": "1.0.0",
+  "description": "Count down to an event in the future.",
+  "main": "index.js",
+  "repository": "https://github.com/claudiorivera/countdown-timer.git",
+  "author": "Claudio Rivera <me@claudiorivera.com>",
+  "license": "MIT",
+  "private": true
+}
