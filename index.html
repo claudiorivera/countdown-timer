@@ -7,24 +7,25 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="app">
-      <form>
-        <label for="eventName">Event Name</label>
-        <input
-          type="text"
-          name="eventName"
-          placeholder="My Event Name"
-          required
-        />
-        <label for="eventDateTime">Event Date/Time</label>
-        <input
-          type="datetime"
-          name="eventDateTime"
-          placeholder="2020-08-01 00:00"
-        />
-        <button id="startButton">Start</button>
-      </form>
-    </div>
-    <script src="index.js"></script>
+    <form>
+      <label for="eventName">Event Name</label>
+      <input
+        type="text"
+        name="eventName"
+        placeholder="My Event Name"
+        required
+      />
+      <label for="eventDate">Event Date</label>
+      <input
+        type="date"
+        name="eventDate"
+        id="eventDate"
+        placeholder="2020-08-01"
+      />
+      <label for="eventTime">Event Time</label>
+      <input type="time" name="eventTime" id="eventTime" />
+      <button>Start</button>
+    </form>
+    <script src="script.js"></script>
   </body>
 </html>
