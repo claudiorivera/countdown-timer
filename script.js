@@ -84,9 +84,9 @@ const startTimer = (end) => {
 // Formats the time left string, accounting for singular/plural time left
 const formatTimeLeftString = (d, h, m, s) => {
   return (
-    (d < 1 ? "" : d + " day" + (d === 1 ? " " : "s ")) +
-    (h < 1 ? "" : h + " hour" + (h === 1 ? " " : "s ")) +
-    (m < 1 ? "" : m + " minute" + (m === 1 ? " " : "s ")) +
+    (d < 1 ? "" : d + " day" + (d === 1 ? ", " : "s, ")) +
+    (h < 1 ? "" : h + " hour" + (h === 1 ? ", " : "s, ")) +
+    (m < 1 ? "" : m + " minute" + (m === 1 ? " and " : "s and ")) +
     s +
     " second" +
     (s === 1 ? " " : "s ") +
