@@ -8,3 +8,4 @@ Written in pure JavaScript, without any libraries or frameworks.
 
 - Styling
 - Add a stop/reset button
+- Add Safari support
