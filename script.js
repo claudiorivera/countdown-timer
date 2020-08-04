@@ -11,14 +11,18 @@ const timer = document.querySelector("#timer");
 
 // Form submit handler
 form.addEventListener("submit", (event) => {
+  // Prevent page from refreshing on submit
   event.preventDefault();
 
-  // TODO - Get the date in local time, not UTC
-  // Get UNIX timestamp for event date
+  // Get UNIX timestamp for event date (Midnight in UTC)
   let end = eventDate.valueAsNumber;
-  console.log(end);
 
-  // Get time values, if they exist, and add them to end value
+  // Calculate timezone offset (in minutes) and apply to end time
+  const date = new Date();
+  const timezoneOffset = date.getTimezoneOffset();
+  end += timezoneOffset * MILLISECONDS_IN_A_MINUTE;
+
+  // Get optional time values, if they exist, and apply them to end value
   if (eventTime.value) {
     const time = eventTime.value.split(":");
     const hours = Number(time[0]);
