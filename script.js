@@ -1,107 +1,62 @@
+// Constants
+const MILLISECONDS_IN_A_DAY = 1000 * 60 * 60 * 24;
+const MILLISECONDS_IN_AN_HOUR = 1000 * 60 * 60;
+const MILLISECONDS_IN_A_MINUTE = 1000 * 60;
+
 // DOM elements
-const eventName = document.querySelector("#eventName");
-const eventMonth = document.querySelector("#eventMonth");
-const eventDay = document.querySelector("#eventDay");
-const eventYear = document.querySelector("#eventYear");
-const eventHour = document.querySelector("#eventHour");
-const eventMinute = document.querySelector("#eventMinute");
-const amPm = document.querySelector("input[name=amPm]:checked").value;
-const start = document.querySelector("#start");
-const stop = document.querySelector("#stop");
-const outputDisplay = document.querySelector("#outputDisplay");
-const inputForm = document.querySelector("#inputForm");
-const timeLeftDisplay = document.querySelector("#timeLeftDisplay");
+const eventDate = document.querySelector("input[type='date']");
+const eventTime = document.querySelector("input[type='time']");
+const form = document.querySelector("form");
+const timer = document.querySelector("#timer");
 
-// DOM ready
-document.addEventListener("DOMContentLoaded", () => {
-  createFormOptions();
+// Form submit handler
+form.addEventListener("submit", (event) => {
+  // Prevent page from refreshing on submit
+  event.preventDefault();
 
-  start.addEventListener("click", handleStart);
-  stop.addEventListener("click", handleStop);
+  // Get UNIX timestamp for event date (Midnight in UTC)
+  let end = eventDate.valueAsNumber;
+
+  // Calculate timezone offset (in minutes) and apply to end time
+  const date = new Date();
+  const timezoneOffset = date.getTimezoneOffset();
+  end += timezoneOffset * MILLISECONDS_IN_A_MINUTE;
+
+  // Get optional time values, if they exist, and apply them to end value
+  if (eventTime.value) {
+    const time = eventTime.value.split(":");
+    const hours = Number(time[0]);
+    const minutes = Number(time[1]);
+
+    end += hours * MILLISECONDS_IN_AN_HOUR + minutes * MILLISECONDS_IN_A_MINUTE;
+  }
+
+  // Hide form and show timer
+  form.classList.add("hidden");
+  timer.classList.remove("hidden");
+
+  // Start timer
+  setInterval(() => {
+    // Get timestamp for now and calculate difference between event and now
+    const now = Date.now();
+    let timeLeft = end - now;
+
+    // Calculate days left
+    const daysLeft = Math.floor(timeLeft / MILLISECONDS_IN_A_DAY);
+    timeLeft -= daysLeft * MILLISECONDS_IN_A_DAY;
+
+    // Calculate hours left
+    const hoursLeft = Math.floor(timeLeft / MILLISECONDS_IN_AN_HOUR);
+    timeLeft -= hoursLeft * MILLISECONDS_IN_AN_HOUR;
+
+    // Calculate minutes left
+    const minutesLeft = Math.floor(timeLeft / MILLISECONDS_IN_A_MINUTE);
+    timeLeft -= minutesLeft * MILLISECONDS_IN_A_MINUTE;
+
+    // Calculate seconds left
+    const secondsLeft = Math.floor(timeLeft / 1000);
+
+    // TODO - Display the countdown timer
+    console.log(daysLeft, hoursLeft, minutesLeft, secondsLeft);
+  }, 1000);
 });
-
-const handleStop = (e) => {
-  e.preventDefault();
-  outputDisplay.classList.add("hidden");
-  inputForm.classList.remove("hidden");
-};
-
-const handleStart = (e) => {
-  // Keep page from refreshing
-  e.preventDefault();
-
-  // Dummy values for now
-  let yearsLeft = 1;
-  let monthsLeft = 2;
-  let daysLeft = 3;
-  let hoursLeft = 4;
-  let minutesLeft = 5;
-  let secondsLeft = 20;
-
-  // Create time left string
-  const timeLeftText = document.createTextNode(
-    `${yearsLeft} years ${monthsLeft} months ${daysLeft} days
-    ${hoursLeft} hours ${minutesLeft} minutes and ${secondsLeft} seconds left until
-    ${eventName.value}!`
-  );
-
-  timeLeftDisplay.appendChild(timeLeftText);
-
-  outputDisplay.classList.remove("hidden");
-  inputForm.classList.add("hidden");
-};
-
-const createFormOptions = () => {
-  // Array of months of the year
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  // Create month options
-  months.forEach((month, index) => {
-    // Index + 1 so that January is 1, February is 2, etc.
-    const option = new Option(month, index + 1);
-    document.querySelector("#eventMonth").appendChild(option);
-  });
-
-  // Create day options, 1-indexed
-  const days = new Array(31);
-  for (let i = 1; i < days.length + 1; i++) {
-    const option = new Option(i, i);
-    document.querySelector("#eventDay").appendChild(option);
-  }
-
-  // Create year options
-  const years = new Array(25);
-  for (let i = 0; i < years.length; i++) {
-    const option = new Option(i + 2020, i + 2020);
-    document.querySelector("#eventYear").appendChild(option);
-  }
-
-  // Create hour options, 1-indexed
-  const hours = new Array(12);
-  for (let i = 1; i < hours.length + 1; i++) {
-    const option = new Option(i, i);
-    option.selected = 12;
-    document.querySelector("#eventHour").appendChild(option);
-  }
-
-  // Create minute options
-  const minutes = new Array(60);
-  for (let i = 0; i < minutes.length; i++) {
-    // Numbers less than 10 have a leading zero
-    const option = new Option((i < 10 ? "0" : "") + i, (i < 10 ? "0" : "") + i);
-    document.querySelector("#eventMinute").appendChild(option);
-  }
-};

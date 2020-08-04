@@ -7,38 +7,22 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="app">
-      <form id="inputForm">
-        <div id="eventNameContainer">
-          <label for="eventName">Event Name</label>
-          <input
-            type="text"
-            name="eventName"
-            id="eventName"
-            placeholder="My Event Name"
-          />
-        </div>
-        <div id="eventDateContainer">
-          <label>Date</label>
-          <select name="eventMonth" id="eventMonth"></select>
-          <select name="eventDay" id="eventDay"></select>
-          <select name="eventYear" id="eventYear"></select>
-        </div>
-        <div id="eventTimeContainer">
-          <label>Time (Optional)</label>
-          <select name="eventHour" id="eventHour"></select>
-          <select name="eventMinute" id="eventMinute"></select>
-          <label for="am">AM</label>
-          <input type="radio" name="amPm" id="am" value="am" checked />
-          <label for="pm">PM</label>
-          <input type="radio" name="amPm" id="pm" value="pm" />
-        </div>
-        <button id="start">Start</button>
-      </form>
-      <div id="outputDisplay" class="hidden outputDisplay">
-        <div id="timeLeftDisplay"></div>
-        <button id="stop">Stop</button>
-      </div>
+    <form>
+      <label for="eventName">Event Name</label>
+      <input
+        type="text"
+        name="eventName"
+        placeholder="My Event Name"
+        required
+      />
+      <label for="eventDate">Event Date</label>
+      <input type="date" name="eventDate" placeholder="2020-08-01" required />
+      <label for="eventTime">Event Time</label>
+      <input type="time" name="eventTime" />
+      <button>Start</button>
+    </form>
+    <div id="timer" class="hidden">
+      1 day, 2 hours, 3 minutes, and 4 seconds left until The Event!
     </div>
     <script src="script.js"></script>
   </body>
