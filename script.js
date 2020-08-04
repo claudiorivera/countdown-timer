@@ -4,6 +4,7 @@ const MILLISECONDS_IN_AN_HOUR = 1000 * 60 * 60;
 const MILLISECONDS_IN_A_MINUTE = 1000 * 60;
 
 // DOM elements
+const eventName = document.querySelector("input[name='eventName']");
 const eventDate = document.querySelector("input[type='date']");
 const eventTime = document.querySelector("input[type='time']");
 const form = document.querySelector("form");
@@ -89,6 +90,8 @@ const formatTimeLeftString = (d, h, m, s) => {
     s +
     " second" +
     (s === 1 ? " " : "s ") +
-    "left until The Event!"
+    "left until " +
+    eventName.value +
+    "!"
   );
 };
