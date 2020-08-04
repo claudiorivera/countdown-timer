@@ -17,13 +17,11 @@
       />
       <label for="eventDate">Event Date</label>
       <input type="date" name="eventDate" placeholder="2020-08-01" required />
-      <label for="eventTime">Event Time</label>
+      <label for="eventTime">Event Time (Defaults to midnight)</label>
       <input type="time" name="eventTime" />
       <button>Start</button>
     </form>
-    <div id="timer" class="hidden">
-      1 day, 2 hours, 3 minutes, and 4 seconds left until The Event!
-    </div>
+    <div id="timer" class="hidden"></div>
     <script src="script.js"></script>
   </body>
 </html>
