@@ -7,21 +7,43 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <form>
-      <label for="eventName">Event Name</label>
-      <input
-        type="text"
-        name="eventName"
-        placeholder="My Event Name"
-        required
-      />
-      <label for="eventDate">Event Date</label>
-      <input type="date" name="eventDate" placeholder="2020-08-01" required />
-      <label for="eventTime">Event Time (Defaults to midnight)</label>
-      <input type="time" name="eventTime" />
-      <button>Start</button>
-    </form>
-    <div id="timer" class="hidden"></div>
+    <div class="app">
+      <header>
+        <h1>Countdown Timer</h1>
+        <p>
+          Enter an event name, date, and optional time, and you'll get a
+          countdown timer that counts the days, hours, minutes, and seconds left
+          until the event!
+        </p>
+      </header>
+      <hr />
+      <form>
+        <div class="eventName">
+          <label for="eventName">Event Name</label>
+          <input
+            type="text"
+            name="eventName"
+            placeholder="My Event Name"
+            required
+          />
+        </div>
+        <div class="eventDate">
+          <label for="eventDate">Event Date</label>
+          <input
+            type="date"
+            name="eventDate"
+            placeholder="2020-08-01"
+            required
+          />
+        </div>
+        <div class="eventTime">
+          <label for="eventTime">Event Time (Defaults to midnight)</label>
+          <input type="time" name="eventTime" />
+        </div>
+        <button>Start</button>
+      </form>
+    </div>
+    <div id="timer" class="hidden timer"></div>
     <script src="script.js"></script>
   </body>
 </html>

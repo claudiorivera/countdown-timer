@@ -9,6 +9,7 @@ const eventDate = document.querySelector("input[type='date']");
 const eventTime = document.querySelector("input[type='time']");
 const form = document.querySelector("form");
 const timer = document.querySelector("#timer");
+const app = document.querySelector(".app");
 
 // Form submit handler
 form.addEventListener("submit", (event) => {
@@ -36,7 +37,7 @@ form.addEventListener("submit", (event) => {
     startTimer(end);
 
     // Hide form, show timer
-    form.classList.add("hidden");
+    app.classList.add("hidden");
     timer.classList.remove("hidden");
   } else {
     alert("Please enter an event in the future");
