@@ -37,8 +37,8 @@ form.addEventListener("submit", (event) => {
     startTimer(end);
 
     // Hide form, show timer
-    app.classList.add("hidden");
-    timer.classList.remove("hidden");
+    app.classList.toggle("hidden");
+    timer.classList.toggle("hidden");
   } else {
     alert("Please enter an event in the future");
   }
